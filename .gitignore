@@ -1,0 +1,8 @@
+.vim/backup/*
+!.vim/backup/.gitkeep
+.vim/plugged
+.vim/autoload/emmet*
+
+.vim/.netrwhist
+
+.DS_Store

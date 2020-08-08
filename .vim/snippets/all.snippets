@@ -1,0 +1,35 @@
+
+snippet {{ "Closing Brace" i
+}$0
+endsnippet
+
+snippet [[ "Closing Bracket" i
+]$0
+endsnippet
+
+
+snippet jsw "JS wrapper"
+(function($){
+$0
+})(${1:args});
+endsnippet
+
+
+snippet <% "EJS Tag" i
+<% $0 %>
+endsnippet
+
+
+snippet <%= "EJS Output Tag" i
+<%= $0 %>
+endsnippet
+
+snippet {: "JSON segment" i
+{
+  $0,
+}
+endsnippet
+
+snippet oi "Object item" i
+${1:key}: ${2:value}$0
+endsnippet
