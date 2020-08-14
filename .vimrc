@@ -331,6 +331,18 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 " Set GitGutter on!
 let g:gitgutter_enabled = 1
 
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+
+set statusline+=%{GitStatus()}
+let g:gitgutter_highlight_lines = 1
+let g:gitgutter_highlight_linenrs = 1
+highlight link GitGutterChangeLine DiffText
+let g:gitgutter_preview_win_floating = 1
+let g:gitgutter_use_location_list = 1
+set updatetime=100
 
 " Define Map Leader
 :let mapleader = ","
@@ -338,13 +350,10 @@ let g:gitgutter_enabled = 1
 " Remember info about open buggers on close
 set viminfo^=%
 
-
 " Disable lint
 :let disable_lint = 1
 
-
 set laststatus=2
-
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -519,5 +528,3 @@ au BufNewFile,BufRead *.ejs set filetype=html
 
 autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 autocmd BufNewFile,BufRead *.ts,*.tsx set syntax=typescript
-
-" Set jsx for .js files as well as .jsUYYYY:Q
