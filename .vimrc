@@ -337,6 +337,7 @@ function! GitStatus()
 endfunction
 
 set statusline+=%{GitStatus()}
+set statusline+=%{FugitiveStatusline()}
 let g:gitgutter_highlight_lines = 1
 let g:gitgutter_highlight_linenrs = 1
 highlight link GitGutterChangeLine DiffText
@@ -345,7 +346,7 @@ let g:gitgutter_use_location_list = 1
 set updatetime=100
 
 " Define Map Leader
-:let mapleader = ","
+:let mapleader = " "
 
 " Remember info about open buggers on close
 set viminfo^=%
@@ -390,7 +391,6 @@ set matchpairs+=<:>     " specially for html
 " ========================================
 " Utility Functions & Custom Commands
 " ========================================
-
 
 " Highlight trailing white space for find/replace
 func! DeleteTrailingWS()
