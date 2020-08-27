@@ -177,6 +177,14 @@ Plug 'easymotion/vim-easymotion'
 
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'majutsushi/tagbar'
+
+Plug 'hushicai/tagbar-javascript.vim'
+
+Plug 'nathanaelkane/vim-indent-guides'
+
+Plug 'vim-scripts/AutoComplPop'
+
 call plug#end()
 
 
@@ -385,6 +393,7 @@ let g:syntastic_typescript_checkers = ['tslint']
 
 let g:syntastic_typescript_tsc_fname = ''
 
+let g:indent_guides_enable_on_vim_startup = 1
 " Match settings
 set matchpairs+=<:>     " specially for html
 
@@ -513,7 +522,7 @@ vnoremap <leader>c :w !xsel --clipboard --input<CR><CR>
 " Pretty print JSON
 :nnoremap <leader>ppj :%!python -m json.tool<CR>
 
-
+:nnoremap <leader>i :TagbarToggle<CR>
 " ========================================
 " Custom Abbreviations
 " ========================================
