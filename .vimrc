@@ -185,13 +185,50 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 Plug 'vim-scripts/AutoComplPop'
 
+Plug 'w0rp/ale'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'valloric/youcompleteme'
+
 call plug#end()
 
+if has('python3')
+endif
 
 " ========================================
 " Personal Settings
 " ========================================
 
+
+" In ~/.vim/ftplugin/javascript.vim, or somewhere similar.
+" Fix files with prettier, and then ESLint.
+let b:ale_fixers = ['prettier', 'eslint']
+" Equivalent to the above.
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+
+" In ~/.vim/vimrc, or somewhere similar.
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
+
+let g:ale_completion_enabled = 1
+
+function! LinterStatus() abort
+let l:counts = ale#statusline#Count(bufnr(''))
+
+let l:all_errors = l:counts.error + l:counts.style_error
+let l:all_non_errors = l:counts.total - l:all_errors
+
+return l:counts.total == 0 ? 'OK' : printf(
+\   '%dW %dE',
+\   all_non_errors,
+\   all_errors
+\)
+endfunction
+
+set statusline=%{LinterStatus()}
 
 " Set where backups go
 set backupdir=~/.vim/backup
