@@ -151,6 +151,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'bling/vim-airline'
 
+Plug 'vim-airline/vim-airline-themes'
+
 Plug 'lambdatoast/elm.vim'
 
 Plug 'isRuslan/vim-es6'
@@ -187,9 +189,11 @@ Plug 'vim-scripts/AutoComplPop'
 
 Plug 'w0rp/ale'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-Plug 'valloric/youcompleteme'
+" Plug 'valloric/youcompleteme'
+
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
 
 call plug#end()
 
@@ -200,20 +204,14 @@ endif
 " Personal Settings
 " ========================================
 
-
-" In ~/.vim/ftplugin/javascript.vim, or somewhere similar.
-" Fix files with prettier, and then ESLint.
-let b:ale_fixers = ['prettier', 'eslint']
-" Equivalent to the above.
-let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
-
+" :inoremap <expr> . ".\<C-X>\<C-O>"
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \}
 
-let g:ale_completion_enabled = 1
+" let g:ale_completion_enabled = 1
 
 function! LinterStatus() abort
 let l:counts = ale#statusline#Count(bufnr(''))
@@ -315,7 +313,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 nmap ,n :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen=1
 
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -416,7 +414,10 @@ let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.branch = '⎇'
 
 let g:airline_detect_iminsert=1
-let g:airline#extensions#syntastic#enabled = 1
+" let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='base16'
 
 
 let g:ctrlp_working_path_mode = 'ra'
