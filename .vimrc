@@ -194,7 +194,36 @@ Plug 'vim-test/vim-test'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
+Plug 'puremourning/vimspector'
+
+Plug 'posva/vim-vue'
+
 call plug#end()
+
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_sidebar_width = 75
+let g:vimspector_bottombar_height = 15
+let g:vue_pre_processors = ['pug', 'scss']
+
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
 
 if has('python3')
 endif
@@ -717,9 +746,9 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
